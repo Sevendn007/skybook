@@ -1,163 +1,183 @@
 [
   {
     "id": 1,
-    "title": "Sách mẫu #1",
-    "author": "Tác giả 1",
+    "title": "Đắc Nhân Tâm",
+    "author": "Dale Carnegie",
     "category": "Kỹ năng",
-    "price": 79000,
-    "image": "https://picsum.photos/seed/skybook1/600/800"
+    "price": 119000,
+    "image": "https://picsum.photos/seed/famous1/600/800",
+    "preview": "Giới thiệu ngắn: “Đắc Nhân Tâm” — tác giả Dale Carnegie. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 2,
-    "title": "Sách mẫu #2",
-    "author": "Tác giả 2",
-    "category": "Tâm lý",
-    "price": 89000,
-    "image": "https://picsum.photos/seed/skybook2/600/800"
+    "title": "Tuổi Trẻ Đáng Giá Bao Nhiêu",
+    "author": "Rosie Nguyễn",
+    "category": "Kỹ năng",
+    "price": 139000,
+    "image": "https://picsum.photos/seed/famous2/600/800",
+    "preview": "Giới thiệu ngắn: “Tuổi Trẻ Đáng Giá Bao Nhiêu” — tác giả Rosie Nguyễn. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 3,
-    "title": "Sách mẫu #3",
-    "author": "Tác giả 3",
+    "title": "Nhà Giả Kim",
+    "author": "Paulo Coelho",
     "category": "Văn học",
-    "price": 99000,
-    "image": "https://picsum.photos/seed/skybook3/600/800"
+    "price": 159000,
+    "image": "https://picsum.photos/seed/famous3/600/800",
+    "preview": "Giới thiệu ngắn: “Nhà Giả Kim” — tác giả Paulo Coelho. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 4,
-    "title": "Sách mẫu #4",
-    "author": "Tác giả 4",
-    "category": "Thiếu nhi",
-    "price": 109000,
-    "image": "https://picsum.photos/seed/skybook4/600/800"
+    "title": "Muôn Kiếp Nhân Sinh",
+    "author": "Nguyên Phong",
+    "category": "Tâm lý",
+    "price": 179000,
+    "image": "https://picsum.photos/seed/famous4/600/800",
+    "preview": "Giới thiệu ngắn: “Muôn Kiếp Nhân Sinh” — tác giả Nguyên Phong. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 5,
-    "title": "Sách mẫu #5",
-    "author": "Tác giả 5",
-    "category": "Công nghệ",
-    "price": 119000,
-    "image": "https://picsum.photos/seed/skybook5/600/800"
+    "title": "Totto-chan Bên Cửa Sổ",
+    "author": "Tetsuko Kuroyanagi",
+    "category": "Thiếu nhi",
+    "price": 199000,
+    "image": "https://picsum.photos/seed/famous5/600/800",
+    "preview": "Giới thiệu ngắn: “Totto-chan Bên Cửa Sổ” — tác giả Tetsuko Kuroyanagi. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 6,
-    "title": "Sách mẫu #6",
-    "author": "Tác giả 6",
-    "category": "Kinh doanh",
-    "price": 129000,
-    "image": "https://picsum.photos/seed/skybook6/600/800"
+    "title": "Sapiens: Lược sử loài người",
+    "author": "Yuval Noah Harari",
+    "category": "Công nghệ",
+    "price": 219000,
+    "image": "https://picsum.photos/seed/famous6/600/800",
+    "preview": "Giới thiệu ngắn: “Sapiens: Lược sử loài người” — tác giả Yuval Noah Harari. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 7,
-    "title": "Sách mẫu #7",
-    "author": "Tác giả 7",
-    "category": "Kỹ năng",
-    "price": 139000,
-    "image": "https://picsum.photos/seed/skybook7/600/800"
+    "title": "Thiên Nga Đen",
+    "author": "Nassim Nicholas Taleb",
+    "category": "Kinh doanh",
+    "price": 99000,
+    "image": "https://picsum.photos/seed/famous7/600/800",
+    "preview": "Giới thiệu ngắn: “Thiên Nga Đen” — tác giả Nassim Nicholas Taleb. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 8,
-    "title": "Sách mẫu #8",
-    "author": "Tác giả 8",
-    "category": "Tâm lý",
-    "price": 149000,
-    "image": "https://picsum.photos/seed/skybook8/600/800"
+    "title": "Cha Giàu Cha Nghèo",
+    "author": "Robert T. Kiyosaki",
+    "category": "Kinh doanh",
+    "price": 119000,
+    "image": "https://picsum.photos/seed/famous8/600/800",
+    "preview": "Giới thiệu ngắn: “Cha Giàu Cha Nghèo” — tác giả Robert T. Kiyosaki. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 9,
-    "title": "Sách mẫu #9",
-    "author": "Tác giả 9",
-    "category": "Văn học",
-    "price": 69000,
-    "image": "https://picsum.photos/seed/skybook9/600/800"
+    "title": "7 Thói Quen Hiệu Quả",
+    "author": "Stephen R. Covey",
+    "category": "Kỹ năng",
+    "price": 139000,
+    "image": "https://picsum.photos/seed/famous9/600/800",
+    "preview": "Giới thiệu ngắn: “7 Thói Quen Hiệu Quả” — tác giả Stephen R. Covey. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 10,
-    "title": "Sách mẫu #10",
-    "author": "Tác giả 10",
-    "category": "Thiếu nhi",
-    "price": 79000,
-    "image": "https://picsum.photos/seed/skybook10/600/800"
+    "title": "Tư Duy Nhanh Và Chậm",
+    "author": "Daniel Kahneman",
+    "category": "Tâm lý",
+    "price": 159000,
+    "image": "https://picsum.photos/seed/famous10/600/800",
+    "preview": "Giới thiệu ngắn: “Tư Duy Nhanh Và Chậm” — tác giả Daniel Kahneman. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 11,
-    "title": "Sách mẫu #11",
-    "author": "Tác giả 11",
-    "category": "Công nghệ",
-    "price": 89000,
-    "image": "https://picsum.photos/seed/skybook11/600/800"
+    "title": "Đi Tìm Lẽ Sống",
+    "author": "Viktor E. Frankl",
+    "category": "Tâm lý",
+    "price": 179000,
+    "image": "https://picsum.photos/seed/famous11/600/800",
+    "preview": "Giới thiệu ngắn: “Đi Tìm Lẽ Sống” — tác giả Viktor E. Frankl. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 12,
-    "title": "Sách mẫu #12",
-    "author": "Tác giả 12",
-    "category": "Kinh doanh",
-    "price": 99000,
-    "image": "https://picsum.photos/seed/skybook12/600/800"
+    "title": "Bố Già",
+    "author": "Mario Puzo",
+    "category": "Văn học",
+    "price": 199000,
+    "image": "https://picsum.photos/seed/famous12/600/800",
+    "preview": "Giới thiệu ngắn: “Bố Già” — tác giả Mario Puzo. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 13,
-    "title": "Sách mẫu #13",
-    "author": "Tác giả 13",
-    "category": "Kỹ năng",
-    "price": 109000,
-    "image": "https://picsum.photos/seed/skybook13/600/800"
+    "title": "Mắt Biếc",
+    "author": "Nguyễn Nhật Ánh",
+    "category": "Văn học",
+    "price": 219000,
+    "image": "https://picsum.photos/seed/famous13/600/800",
+    "preview": "Giới thiệu ngắn: “Mắt Biếc” — tác giả Nguyễn Nhật Ánh. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 14,
-    "title": "Sách mẫu #14",
-    "author": "Tác giả 14",
-    "category": "Tâm lý",
-    "price": 119000,
-    "image": "https://picsum.photos/seed/skybook14/600/800"
+    "title": "Dế Mèn Phiêu Lưu Ký",
+    "author": "Tô Hoài",
+    "category": "Thiếu nhi",
+    "price": 99000,
+    "image": "https://picsum.photos/seed/famous14/600/800",
+    "preview": "Giới thiệu ngắn: “Dế Mèn Phiêu Lưu Ký” — tác giả Tô Hoài. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 15,
-    "title": "Sách mẫu #15",
-    "author": "Tác giả 15",
-    "category": "Văn học",
-    "price": 129000,
-    "image": "https://picsum.photos/seed/skybook15/600/800"
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Kỹ năng",
+    "price": 119000,
+    "image": "https://picsum.photos/seed/famous15/600/800",
+    "preview": "Giới thiệu ngắn: “Atomic Habits” — tác giả James Clear. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 16,
-    "title": "Sách mẫu #16",
-    "author": "Tác giả 16",
-    "category": "Thiếu nhi",
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "category": "Kỹ năng",
     "price": 139000,
-    "image": "https://picsum.photos/seed/skybook16/600/800"
+    "image": "https://picsum.photos/seed/famous16/600/800",
+    "preview": "Giới thiệu ngắn: “Deep Work” — tác giả Cal Newport. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 17,
-    "title": "Sách mẫu #17",
-    "author": "Tác giả 17",
-    "category": "Công nghệ",
-    "price": 149000,
-    "image": "https://picsum.photos/seed/skybook17/600/800"
+    "title": "Từ Tốt Đến Vĩ Đại",
+    "author": "Jim Collins",
+    "category": "Kinh doanh",
+    "price": 159000,
+    "image": "https://picsum.photos/seed/famous17/600/800",
+    "preview": "Giới thiệu ngắn: “Từ Tốt Đến Vĩ Đại” — tác giả Jim Collins. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 18,
-    "title": "Sách mẫu #18",
-    "author": "Tác giả 18",
-    "category": "Kinh doanh",
-    "price": 69000,
-    "image": "https://picsum.photos/seed/skybook18/600/800"
+    "title": "Bí Mật",
+    "author": "Rhonda Byrne",
+    "category": "Tâm lý",
+    "price": 179000,
+    "image": "https://picsum.photos/seed/famous18/600/800",
+    "preview": "Giới thiệu ngắn: “Bí Mật” — tác giả Rhonda Byrne. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 19,
-    "title": "Sách mẫu #19",
-    "author": "Tác giả 19",
-    "category": "Kỹ năng",
-    "price": 79000,
-    "image": "https://picsum.photos/seed/skybook19/600/800"
+    "title": "Harry Potter và Hòn Đá Phù Thủy",
+    "author": "J.K. Rowling",
+    "category": "Văn học",
+    "price": 199000,
+    "image": "https://picsum.photos/seed/famous19/600/800",
+    "preview": "Giới thiệu ngắn: “Harry Potter và Hòn Đá Phù Thủy” — tác giả J.K. Rowling. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 20,
-    "title": "Sách mẫu #20",
-    "author": "Tác giả 20",
+    "title": "Thiền và Nghệ Thuật Bảo Dưỡng Xe Mô Tô",
+    "author": "Robert M. Pirsig",
     "category": "Tâm lý",
-    "price": 89000,
-    "image": "https://picsum.photos/seed/skybook20/600/800"
+    "price": 219000,
+    "image": "https://picsum.photos/seed/famous20/600/800",
+    "preview": "Giới thiệu ngắn: “Thiền và Nghệ Thuật Bảo Dưỡng Xe Mô Tô” — tác giả Robert M. Pirsig. Đây là trích đoạn/nhận xét tổng quan giúp bạn hình dung nội dung và giá trị chính của cuốn sách."
   },
   {
     "id": 21,
@@ -165,7 +185,8 @@
     "author": "Tác giả 21",
     "category": "Văn học",
     "price": 99000,
-    "image": "https://picsum.photos/seed/skybook21/600/800"
+    "image": "https://picsum.photos/seed/skybook21/600/800",
+    "preview": "Giới thiệu: Sách mẫu #21 — Tác giả 21."
   },
   {
     "id": 22,
@@ -173,7 +194,8 @@
     "author": "Tác giả 22",
     "category": "Thiếu nhi",
     "price": 109000,
-    "image": "https://picsum.photos/seed/skybook22/600/800"
+    "image": "https://picsum.photos/seed/skybook22/600/800",
+    "preview": "Giới thiệu: Sách mẫu #22 — Tác giả 22."
   },
   {
     "id": 23,
@@ -181,7 +203,8 @@
     "author": "Tác giả 23",
     "category": "Công nghệ",
     "price": 119000,
-    "image": "https://picsum.photos/seed/skybook23/600/800"
+    "image": "https://picsum.photos/seed/skybook23/600/800",
+    "preview": "Giới thiệu: Sách mẫu #23 — Tác giả 23."
   },
   {
     "id": 24,
@@ -189,7 +212,8 @@
     "author": "Tác giả 24",
     "category": "Kinh doanh",
     "price": 129000,
-    "image": "https://picsum.photos/seed/skybook24/600/800"
+    "image": "https://picsum.photos/seed/skybook24/600/800",
+    "preview": "Giới thiệu: Sách mẫu #24 — Tác giả 24."
   },
   {
     "id": 25,
@@ -197,7 +221,8 @@
     "author": "Tác giả 25",
     "category": "Kỹ năng",
     "price": 139000,
-    "image": "https://picsum.photos/seed/skybook25/600/800"
+    "image": "https://picsum.photos/seed/skybook25/600/800",
+    "preview": "Giới thiệu: Sách mẫu #25 — Tác giả 25."
   },
   {
     "id": 26,
@@ -205,7 +230,8 @@
     "author": "Tác giả 26",
     "category": "Tâm lý",
     "price": 149000,
-    "image": "https://picsum.photos/seed/skybook26/600/800"
+    "image": "https://picsum.photos/seed/skybook26/600/800",
+    "preview": "Giới thiệu: Sách mẫu #26 — Tác giả 26."
   },
   {
     "id": 27,
@@ -213,7 +239,8 @@
     "author": "Tác giả 27",
     "category": "Văn học",
     "price": 69000,
-    "image": "https://picsum.photos/seed/skybook27/600/800"
+    "image": "https://picsum.photos/seed/skybook27/600/800",
+    "preview": "Giới thiệu: Sách mẫu #27 — Tác giả 27."
   },
   {
     "id": 28,
@@ -221,7 +248,8 @@
     "author": "Tác giả 28",
     "category": "Thiếu nhi",
     "price": 79000,
-    "image": "https://picsum.photos/seed/skybook28/600/800"
+    "image": "https://picsum.photos/seed/skybook28/600/800",
+    "preview": "Giới thiệu: Sách mẫu #28 — Tác giả 28."
   },
   {
     "id": 29,
@@ -229,7 +257,8 @@
     "author": "Tác giả 29",
     "category": "Công nghệ",
     "price": 89000,
-    "image": "https://picsum.photos/seed/skybook29/600/800"
+    "image": "https://picsum.photos/seed/skybook29/600/800",
+    "preview": "Giới thiệu: Sách mẫu #29 — Tác giả 29."
   },
   {
     "id": 30,
@@ -237,7 +266,8 @@
     "author": "Tác giả 30",
     "category": "Kinh doanh",
     "price": 99000,
-    "image": "https://picsum.photos/seed/skybook30/600/800"
+    "image": "https://picsum.photos/seed/skybook30/600/800",
+    "preview": "Giới thiệu: Sách mẫu #30 — Tác giả 30."
   },
   {
     "id": 31,
@@ -245,7 +275,8 @@
     "author": "Tác giả 31",
     "category": "Kỹ năng",
     "price": 109000,
-    "image": "https://picsum.photos/seed/skybook31/600/800"
+    "image": "https://picsum.photos/seed/skybook31/600/800",
+    "preview": "Giới thiệu: Sách mẫu #31 — Tác giả 31."
   },
   {
     "id": 32,
@@ -253,7 +284,8 @@
     "author": "Tác giả 32",
     "category": "Tâm lý",
     "price": 119000,
-    "image": "https://picsum.photos/seed/skybook32/600/800"
+    "image": "https://picsum.photos/seed/skybook32/600/800",
+    "preview": "Giới thiệu: Sách mẫu #32 — Tác giả 32."
   },
   {
     "id": 33,
@@ -261,7 +293,8 @@
     "author": "Tác giả 33",
     "category": "Văn học",
     "price": 129000,
-    "image": "https://picsum.photos/seed/skybook33/600/800"
+    "image": "https://picsum.photos/seed/skybook33/600/800",
+    "preview": "Giới thiệu: Sách mẫu #33 — Tác giả 33."
   },
   {
     "id": 34,
@@ -269,7 +302,8 @@
     "author": "Tác giả 34",
     "category": "Thiếu nhi",
     "price": 139000,
-    "image": "https://picsum.photos/seed/skybook34/600/800"
+    "image": "https://picsum.photos/seed/skybook34/600/800",
+    "preview": "Giới thiệu: Sách mẫu #34 — Tác giả 34."
   },
   {
     "id": 35,
@@ -277,7 +311,8 @@
     "author": "Tác giả 35",
     "category": "Công nghệ",
     "price": 149000,
-    "image": "https://picsum.photos/seed/skybook35/600/800"
+    "image": "https://picsum.photos/seed/skybook35/600/800",
+    "preview": "Giới thiệu: Sách mẫu #35 — Tác giả 35."
   },
   {
     "id": 36,
@@ -285,7 +320,8 @@
     "author": "Tác giả 36",
     "category": "Kinh doanh",
     "price": 69000,
-    "image": "https://picsum.photos/seed/skybook36/600/800"
+    "image": "https://picsum.photos/seed/skybook36/600/800",
+    "preview": "Giới thiệu: Sách mẫu #36 — Tác giả 36."
   },
   {
     "id": 37,
@@ -293,7 +329,8 @@
     "author": "Tác giả 37",
     "category": "Kỹ năng",
     "price": 79000,
-    "image": "https://picsum.photos/seed/skybook37/600/800"
+    "image": "https://picsum.photos/seed/skybook37/600/800",
+    "preview": "Giới thiệu: Sách mẫu #37 — Tác giả 37."
   },
   {
     "id": 38,
@@ -301,7 +338,8 @@
     "author": "Tác giả 38",
     "category": "Tâm lý",
     "price": 89000,
-    "image": "https://picsum.photos/seed/skybook38/600/800"
+    "image": "https://picsum.photos/seed/skybook38/600/800",
+    "preview": "Giới thiệu: Sách mẫu #38 — Tác giả 38."
   },
   {
     "id": 39,
@@ -309,7 +347,8 @@
     "author": "Tác giả 39",
     "category": "Văn học",
     "price": 99000,
-    "image": "https://picsum.photos/seed/skybook39/600/800"
+    "image": "https://picsum.photos/seed/skybook39/600/800",
+    "preview": "Giới thiệu: Sách mẫu #39 — Tác giả 39."
   },
   {
     "id": 40,
@@ -317,6 +356,7 @@
     "author": "Tác giả 40",
     "category": "Thiếu nhi",
     "price": 109000,
-    "image": "https://picsum.photos/seed/skybook40/600/800"
+    "image": "https://picsum.photos/seed/skybook40/600/800",
+    "preview": "Giới thiệu: Sách mẫu #40 — Tác giả 40."
   }
 ]

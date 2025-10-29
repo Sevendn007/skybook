@@ -5,7 +5,7 @@
   if(featured){
     const top = items.slice(0,8);
     featured.innerHTML = top.map(i => `
-      <article data-id="${i.id}" class="bg-white rounded-2xl shadow overflow-hidden">
+      <article data-id="${i.id}" class="bg-white rounded-2xl shadow overflow-hidden cursor-pointer" onclick="location.href='./book.html?id=${i.id}'">
         <img src="${i.image}" class="w-full h-60 object-cover" alt="${i.title}"/>
         <div class="p-4">
           <h3 class="font-semibold">${i.title}</h3>
@@ -26,7 +26,7 @@
       const C = cat.value||'';
       const filtered = items.filter(i => (!Q || (i.title.toLowerCase().includes(Q)||i.author.toLowerCase().includes(Q))) && (!C || i.category===C));
       grid.innerHTML = filtered.map(i=>`
-        <article data-id="${i.id}" class="bg-white rounded-2xl shadow overflow-hidden">
+        <article data-id="${i.id}" class="bg-white rounded-2xl shadow overflow-hidden cursor-pointer" onclick="location.href='./book.html?id=${i.id}'">
           <img src="${i.image}" class="w-full h-60 object-cover" alt="${i.title}"/>
           <div class="p-4">
             <h3 class="font-semibold">${i.title}</h3>
