@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thanh toán — SkyBook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-3 flex items-center gap-4">
+    <a href="./" class="flex items-center gap-2 font-semibold text-lg">
+      <img src="./assets/logo.svg" class="w-8 h-8" alt="SkyBook logo"> SkyBook
+    </a>
+    <nav class="ml-auto hidden md:flex gap-6">
+      <a href="./" class="hover:text-blue-600">Trang chủ</a>
+      <a href="./catalog.html" class="hover:text-blue-600">Danh mục</a>
+      <a href="./review.html" class="hover:text-blue-600">Review & Đăng TikTok</a>
+      <a href="./checkout.html" class="hover:text-blue-600">Thanh toán</a>
+    </nav>
+    <div class="ml-auto md:ml-0 flex items-center gap-3">
+      <a href="./login.html" id="accountLink" class="inline-flex items-center px-3 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Đăng nhập</a>
+      <a href="./checkout.html" class="relative inline-flex items-center px-3 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">
+        Giỏ hàng
+        <span id="cartBadge" class="ml-2 inline-flex items-center justify-center min-w-[1.5rem] h-6 rounded-full bg-white text-blue-700 text-xs px-2">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="container mx-auto px-4 pt-10 pb-20">
+  <h1 class="text-3xl font-bold">Giỏ hàng & Thanh toán</h1>
+  <div class="grid md:grid-cols-3 gap-6 mt-8">
+    <section class="md:col-span-2 bg-white rounded-2xl p-6 shadow">
+      <div id="cartList" class="space-y-4"></div>
+    </section>
+    <aside class="bg-white rounded-2xl p-6 shadow">
+      <h2 class="text-xl font-semibold mb-4">Tóm tắt đơn hàng</h2>
+      <div id="summary" class="text-sm text-gray-700"></div>
+      <button onclick="placeOrder()" class="mt-4 w-full px-5 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Đặt hàng</button>
+      <div id="orderStatus" class="text-sm text-gray-700 mt-3"></div>
+    </aside>
+  </div>
+</main>
+
+<footer class="mt-20 border-t bg-white">
+  <div class="text-center text-xs text-gray-500 py-8">© 2025 SkyBook. All rights reserved.</div>
+</footer>
+
+<script>
+function fmt(n){return new Intl.NumberFormat('vi-VN',{style:'currency',currency:'VND'}).format(n)}
+function renderCart(){
+  const cart = JSON.parse(localStorage.getItem('sbCart')||'[]');
+  const list = document.getElementById('cartList');
+  if(cart.length===0){ list.innerHTML = "<p>Giỏ hàng trống.</p>"; }
+  else{
+    list.innerHTML = cart.map((i,idx)=>`
+      <div class='flex items-center gap-4'>
+        <img src='${i.image}' class='w-16 h-20 object-cover rounded-lg'/>
+        <div class='flex-1'>
+          <div class='font-semibold'>${i.title}</div>
+          <div class='text-sm text-gray-500'>${i.author}</div>
+          <div class='font-semibold text-blue-700 mt-1'>${fmt(i.price)}</div>
+        </div>
+        <button onclick='removeItem(${idx})' class='px-3 py-2 rounded-xl bg-gray-200 hover:bg-gray-300'>Xoá</button>
+      </div>`).join('');
+  }
+  const total = cart.reduce((s,i)=>s+i.price,0);
+  document.getElementById('summary').innerHTML = `Số lượng: <b>${cart.length}</b><br/>Tạm tính: <b>${fmt(total)}</b>`;
+  const badge = document.getElementById('cartBadge'); if(badge) badge.innerText = cart.length;
+}
+function removeItem(i){
+  const cart = JSON.parse(localStorage.getItem('sbCart')||'[]');
+  cart.splice(i,1);
+  localStorage.setItem('sbCart', JSON.stringify(cart));
+  renderCart();
+}
+function placeOrder(){
+  const user = localStorage.getItem('skybookUser');
+  if(!user){
+    document.getElementById('orderStatus').innerHTML = "<span class='text-red-600'>Vui lòng đăng nhập trước khi đặt hàng.</span>";
+    return;
+  }
+  document.getElementById('orderStatus').innerText = "Đang tạo đơn hàng...";
+  setTimeout(()=>{
+    localStorage.setItem('sbCart','[]');
+    renderCart();
+    document.getElementById('orderStatus').innerHTML = "✅ Đơn hàng đã được ghi nhận. Chúng tôi sẽ liên hệ xác nhận.";
+  }, 1200);
+}
+document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+<script src="./shop.js"></script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review & Đăng TikTok — SkyBook</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-3 flex items-center gap-4">
+    <a href="./" class="flex items-center gap-2 font-semibold text-lg">
+      <img src="./assets/logo.svg" class="w-8 h-8" alt="SkyBook logo"> SkyBook
+    </a>
+    <nav class="ml-auto hidden md:flex gap-6">
+      <a href="./" class="hover:text-blue-600">Trang chủ</a>
+      <a href="./catalog.html" class="hover:text-blue-600">Danh mục</a>
+      <a href="./review.html" class="hover:text-blue-600">Review & Đăng TikTok</a>
+      <a href="./checkout.html" class="hover:text-blue-600">Thanh toán</a>
+    </nav>
+    <div class="ml-auto md:ml-0 flex items-center gap-3">
+      <a href="./login.html" id="accountLink" class="inline-flex items-center px-3 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Đăng nhập</a>
+      <a href="./checkout.html" class="relative inline-flex items-center px-3 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">
+        Giỏ hàng
+        <span id="cartBadge" class="ml-2 inline-flex items-center justify-center min-w-[1.5rem] h-6 rounded-full bg-white text-blue-700 text-xs px-2">0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="container mx-auto px-4 pt-10 pb-20">
+  <h1 class="text-3xl font-bold">Đăng video review lên TikTok</h1>
+  <p class="mt-2 text-gray-600">Chọn sách, tải video review (A) hoặc dùng video mẫu (B), sau đó đăng <b>Publish</b> hoặc lưu <b>Draft</b>.</p>
+
+  <div class="grid md:grid-cols-3 gap-6 mt-8">
+    <section class="md:col-span-2 bg-white rounded-2xl p-6 shadow">
+      <h2 class="text-xl font-semibold mb-4">1) Chọn sách & chuẩn bị video</h2>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-gray-700 mb-1">Chọn sách</label>
+          <input id="bookSearch" placeholder="Nhập tên sách..." class="w-full rounded-xl border px-4 py-3"/>
+          <div id="bookList" class="mt-3 max-h-56 overflow-auto text-sm"></div>
+        </div>
+        <div>
+          <label class="block text-sm text-gray-700 mb-1">Chọn video review</label>
+          <input id="fileInput" type="file" accept="video/mp4,video/quicktime" class="w-full rounded-xl border px-4 py-3"/>
+          <div class="mt-3 text-xs text-gray-500">Hoặc chọn video mẫu:</div>
+          <select id="sampleSelect" class="mt-1 w-full rounded-xl border px-4 py-3">
+            <option value="">Không dùng video mẫu</option>
+            <option value="sample_a">Mẫu A — Review sách ngắn (10s)</option>
+            <option value="sample_b">Mẫu B — Giới thiệu tác giả (8s)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <label class="block text-sm text-gray-700 mb-1">Caption gợi ý</label>
+        <textarea id="caption" rows="4" class="w-full rounded-xl border px-4 py-3" placeholder="Cảm nhận nhanh về cuốn sách... #SkyBook #ReviewSach #DocSachMoi"></textarea>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-center gap-4">
+        <label class="inline-flex items-center gap-2 text-sm"><input type="radio" name="mode" value="publish" checked> Đăng trực tiếp (Publish)</label>
+        <label class="inline-flex items-center gap-2 text-sm"><input type="radio" name="mode" value="draft"> Lưu bản nháp (Draft)</label>
+      </div>
+
+      <div class="mt-6 flex gap-3">
+        <button onclick="loginTikTok()" class="px-5 py-3 rounded-xl bg-pink-600 text-white hover:bg-pink-700">Đăng nhập TikTok</button>
+        <button onclick="postToTikTok()" class="px-5 py-3 rounded-xl bg-black text-white hover:bg-gray-800">Đăng lên TikTok</button>
+      </div>
+
+      <div id="status" class="mt-4 text-sm text-gray-700"></div>
+    </section>
+
+    <aside class="bg-white rounded-2xl p-6 shadow">
+      <h3 class="text-lg font-semibold mb-3">Gợi ý</h3>
+      <ul class="text-sm text-gray-600 list-disc ml-5 space-y-2">
+        <li>Độ dài 6–15s, tỉ lệ 9:16 hiển thị đẹp.</li>
+        <li>Caption: thêm hashtag theo tên sách, #SkyBook, #ReviewSach.</li>
+        <li>Chọn Publish/Draft theo nhu cầu.</li>
+      </ul>
+    </aside>
+  </div>
+</main>
+
+<footer class="mt-20 border-t bg-white">
+  <div class="text-center text-xs text-gray-500 py-8">© 2025 SkyBook. All rights reserved.</div>
+</footer>
+<script>
+let chosenBook = null;
+async function loadBooks(){
+  const res = await fetch('./products.json');
+  const items = await res.json();
+  const list = document.getElementById('bookList');
+  const input = document.getElementById('bookSearch');
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+  function render(q=''){
+    const ql = q.toLowerCase();
+    const filtered = items.filter(i => !q || i.title.toLowerCase().includes(ql)).slice(0,50);
+    list.innerHTML = filtered.map(i => (
+      `<button class='w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg'
+         onclick='chooseBook("${esc(i.title)}","${esc(i.author)}")'>
+         <span class='font-medium'>${esc(i.title)}</span><span class='text-gray-500'> — ${esc(i.author)}</span>
+       </button>`
+    )).join('');
+  }
+  input.addEventListener('input', e=>render(e.target.value));
+  render('');
+}
+function chooseBook(title, author){
+  chosenBook = {title, author};
+  document.getElementById('status').innerHTML = `Đã chọn: <b>${title}</b> — ${author}`;
+}
+function loginTikTok(){
+  document.getElementById('status').innerText = "Chuyển hướng đến TikTok OAuth...";
+  setTimeout(()=>{ window.location.href = "./oauth/callback.html?code=demo123&state=review"; }, 1200);
+}
+function postToTikTok(){
+  const mode = document.querySelector('input[name="mode"]:checked').value;
+  const file = document.getElementById('fileInput').files[0];
+  const sample = document.getElementById('sampleSelect').value;
+  if(!file && !sample){
+    document.getElementById('status').innerHTML = "<span class='text-red-600'>Vui lòng chọn file video hoặc video mẫu.</span>";
+    return;
+  }
+  const book = chosenBook ? ` [${chosenBook.title} — ${chosenBook.author}]` : "";
+  document.getElementById('status').innerText = "Gọi Content Posting API (init → upload → finalize)...";
+  setTimeout(()=>{
+    document.getElementById('status').innerHTML = `✅ Đã ${mode=='publish'?'đăng trực tiếp (Publish)':'lưu bản nháp (Draft)'} video${book} lên TikTok.`;
+  }, 1600);
+}
+document.addEventListener('DOMContentLoaded', loadBooks);
+</script>
+<script src="./shop.js"></script>
+</body>
+</html>

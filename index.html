@@ -1,88 +1,110 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkyBook – Hiệu sách trực tuyến</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SkyBook — Hiệu sách & Cộng đồng review sách</title>
+  <meta name="description" content="Mua sách, xem review và đăng video review sách lên TikTok ngay trên SkyBook.">
+  <link rel="icon" href="./assets/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>.container{max-width:1100px}</style>
 </head>
 <body class="bg-gray-50 text-gray-800">
-  <header class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-10 text-center shadow-lg">
-    <h1 class="text-4xl font-bold mb-2">SkyBook</h1>
-    <p class="text-lg">Hiệu sách trực tuyến & Demo tích hợp TikTok</p>
-  </header>
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-3 flex items-center gap-4">
+    <a href="./" class="flex items-center gap-2 font-semibold text-lg">
+      <img src="./assets/logo.svg" class="w-8 h-8" alt="SkyBook logo"> SkyBook
+    </a>
+    <nav class="ml-auto hidden md:flex gap-6">
+      <a href="./" class="hover:text-blue-600">Trang chủ</a>
+      <a href="./catalog.html" class="hover:text-blue-600">Danh mục</a>
+      <a href="./review.html" class="hover:text-blue-600">Review & Đăng TikTok</a>
+      <a href="./checkout.html" class="hover:text-blue-600">Thanh toán</a>
+    </nav>
+    <div class="ml-auto md:ml-0 flex items-center gap-3">
+      <a href="./login.html" id="accountLink" class="inline-flex items-center px-3 py-2 rounded-xl bg-gray-200 hover:bg-gray-300">Đăng nhập</a>
+      <a href="./checkout.html" class="relative inline-flex items-center px-3 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700">
+        Giỏ hàng
+        <span id="cartBadge" class="ml-2 inline-flex items-center justify-center min-w-[1.5rem] h-6 rounded-full bg-white text-blue-700 text-xs px-2">0</span>
+      </a>
+    </div>
+  </div>
+</header>
 
-  <main class="max-w-5xl mx-auto py-12 px-4">
-    <section class="text-center mb-12">
-      <h2 class="text-2xl font-semibold mb-4">Giới thiệu</h2>
-      <p class="text-gray-600 leading-relaxed">
-        SkyBook là trang web giới thiệu và bán các đầu sách yêu thích của bạn. 
-        Ngoài ra, đây cũng là bản demo kỹ thuật thử nghiệm tích hợp TikTok API 
-        (Login Kit + Content Posting) để phục vụ việc review ứng dụng trong TikTok Developer Portal.
-      </p>
-    </section>
-
-    <section id="catalog" class="mb-16">
-      <h2 class="text-2xl font-semibold mb-6 text-center">Danh mục sách nổi bật</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="bookGrid">
-        <!-- Sách mẫu (có thể load động từ products.json, hoặc để 4 mẫu tĩnh) -->
-        <div class="bg-white rounded-2xl shadow p-4">
-          <img src="https://picsum.photos/seed/book1/400/500" class="w-full rounded-xl mb-3" />
-          <h3 class="font-semibold">Tư duy tích cực mỗi ngày</h3>
-          <p class="text-sm text-gray-500 mb-2">Tác giả: Nguyễn Văn A</p>
-          <p class="text-blue-600 font-semibold">129.000đ</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow p-4">
-          <img src="https://picsum.photos/seed/book2/400/500" class="w-full rounded-xl mb-3" />
-          <h3 class="font-semibold">Làm chủ thời gian, làm chủ cuộc đời</h3>
-          <p class="text-sm text-gray-500 mb-2">Tác giả: Trần Thị B</p>
-          <p class="text-blue-600 font-semibold">145.000đ</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow p-4">
-          <img src="https://picsum.photos/seed/book3/400/500" class="w-full rounded-xl mb-3" />
-          <h3 class="font-semibold">Khởi nghiệp 0 đồng</h3>
-          <p class="text-sm text-gray-500 mb-2">Tác giả: Lê Hoàng</p>
-          <p class="text-blue-600 font-semibold">179.000đ</p>
-        </div>
-        <div class="bg-white rounded-2xl shadow p-4">
-          <img src="https://picsum.photos/seed/book4/400/500" class="w-full rounded-xl mb-3" />
-          <h3 class="font-semibold">Nghệ thuật giao tiếp đỉnh cao</h3>
-          <p class="text-sm text-gray-500 mb-2">Tác giả: Bùi Minh C</p>
-          <p class="text-blue-600 font-semibold">139.000đ</p>
-        </div>
+<section class="bg-gradient-to-b from-blue-50 to-transparent">
+  <div class="container mx-auto px-4 pt-12 pb-16 grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-bold leading-tight">SkyBook — <span class="text-blue-600">Mua sách</span> & <span class="text-cyan-600">Review trên TikTok</span></h1>
+      <p class="mt-4 text-gray-600">Chọn sách, xem review, và chia sẻ video review của bạn lên TikTok — trực tiếp từ SkyBook.</p>
+      <div class="mt-6 flex gap-3">
+        <a href="./catalog.html" class="inline-flex items-center px-5 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Khám phá danh mục</a>
+        <a href="./review.html" class="inline-flex items-center px-5 py-3 rounded-xl bg-gray-900 text-white hover:bg-black">Review & Đăng TikTok</a>
       </div>
-    </section>
+    </div>
+    <div class="grid grid-cols-3 gap-3">
+      <img class="rounded-2xl shadow" src="https://picsum.photos/seed/book1/400/520" alt="Book cover 1">
+      <img class="rounded-2xl shadow" src="https://picsum.photos/seed/book2/400/520" alt="Book cover 2">
+      <img class="rounded-2xl shadow" src="https://picsum.photos/seed/book3/400/520" alt="Book cover 3">
+    </div>
+  </div>
+</section>
 
-    <!-- ✅ TikTok Integration Demo Section -->
-    <section id="tiktok-demo" class="bg-gray-100 p-8 rounded-2xl text-center shadow-inner">
-      <h2 class="text-2xl font-bold mb-4 text-pink-600">Demo tích hợp TikTok API</h2>
-      <p class="text-gray-600 mb-6">Phần này mô phỏng quy trình đăng nhập TikTok (Login Kit) và tải video (Content Posting API) phục vụ cho quá trình xét duyệt ứng dụng.</p>
-      <div>
-        <button onclick="simulateLogin()" class="px-6 py-3 rounded-xl bg-pink-600 text-white hover:bg-pink-700">Đăng nhập TikTok</button>
-        <button onclick="simulateUpload()" class="ml-3 px-6 py-3 rounded-xl bg-black text-white hover:bg-gray-800">Đăng video demo</button>
+<section class="container mx-auto px-4 py-12">
+  <div class="flex items-end justify-between">
+    <h2 class="text-2xl font-bold">Sách nổi bật</h2>
+    <a class="text-blue-600 hover:underline" href="./catalog.html">Xem tất cả</a>
+  </div>
+  <div id="featured" class="mt-6 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+</section>
+
+<section class="container mx-auto px-4 pb-14">
+  <div class="rounded-2xl bg-white p-6 shadow">
+    <h3 class="text-lg font-semibold">Chia sẻ review sách lên TikTok</h3>
+    <p class="mt-3 text-sm text-gray-600">Đăng nhập TikTok để đăng video review sách của bạn. Video có thể đăng <b>trực tiếp (Publish)</b> hoặc lưu <b>bản nháp (Draft)</b>.</p>
+    <div class="mt-4 flex flex-wrap gap-3">
+      <a href="./review.html" class="px-4 py-2 rounded-xl bg-pink-600 text-white hover:bg-pink-700">Đăng video review</a>
+      <a href="./login.html" class="px-4 py-2 rounded-xl bg-gray-900 text-white hover:bg-black">Đăng nhập</a>
+    </div>
+  </div>
+</section>
+
+<footer class="mt-20 border-t bg-white">
+  <div class="container mx-auto px-4 py-10 grid md:grid-cols-4 gap-8">
+    <div>
+      <div class="flex items-center gap-2 font-semibold text-lg mb-2">
+        <img src="./assets/logo.svg" class="w-7 h-7" alt="SkyBook logo"> SkyBook
       </div>
-      <p id="tiktokStatus" class="mt-6 text-gray-700 font-medium"></p>
-    </section>
-  </main>
-
-  <footer class="bg-gray-900 text-white py-6 text-center mt-16">
-    <p>© 2025 SkyBook. Bản demo thử nghiệm TikTok API.</p>
-  </footer>
-
-  <script>
-    function simulateLogin() {
-      document.getElementById("tiktokStatus").innerText = "👉 Đang chuyển hướng đến TikTok OAuth...";
-      setTimeout(() => {
-        window.location.href = "./oauth/callback.html?code=demo123&state=test123";
-      }, 1500);
-    }
-
-    function simulateUpload() {
-      document.getElementById("tiktokStatus").innerText = "🚀 Đang gọi API Content Posting (demo)...";
-      setTimeout(() => {
-        document.getElementById("tiktokStatus").innerText = "✅ Video demo đã được tải lên TikTok (dạng bản nháp).";
-      }, 2000);
-    }
-  </script>
+      <p class="text-sm text-gray-600">Cộng đồng yêu sách — giới thiệu, đánh giá và chia sẻ video review sách lên TikTok.</p>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2">Thông tin</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a class="hover:text-blue-600" href="./privacy.html">Chính sách quyền riêng tư</a></li>
+        <li><a class="hover:text-blue-600" href="./terms.html">Điều khoản dịch vụ</a></li>
+        <li><a class="hover:text-blue-600" href="./shipping.html">Vận chuyển & giao nhận</a></li>
+        <li><a class="hover:text-blue-600" href="./refund.html">Đổi trả & hoàn tiền</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2">Hỗ trợ</h3>
+      <ul class="space-y-2 text-sm">
+        <li>Email: support@yourdomain.com</li>
+        <li>Zalo: 0123 456 789</li>
+        <li>Giờ làm việc: 9:00–18:00</li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="font-semibold mb-2">Kết nối</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a class="hover:text-blue-600" href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a class="hover:text-blue-600" href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a class="hover:text-blue-600" href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center text-xs text-gray-500 pb-8">© 2025 SkyBook. All rights reserved.</div>
+</footer>
+<script src="./app.js"></script>
+<script src="./shop.js"></script>
 </body>
 </html>
