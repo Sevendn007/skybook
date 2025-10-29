@@ -63,12 +63,14 @@
         <label class="inline-flex items-center gap-2 text-sm"><input type="radio" name="mode" value="draft"> Lưu bản nháp (Draft)</label>
       </div>
 
-      <div class="mt-6 flex gap-3">
-        <button onclick="loginTikTok()" class="px-5 py-3 rounded-xl bg-pink-600 text-white hover:bg-pink-700">Đăng nhập TikTok</button>
-        <button onclick="postToTikTok()" class="px-5 py-3 rounded-xl bg-black text-white hover:bg-gray-800">Đăng lên TikTok</button>
-      </div>
-
-      <div id="status" class="mt-4 text-sm text-gray-700"></div>
+      
+<div class="mt-6 flex flex-wrap gap-3">
+  <button id="btnTiktok" class="px-5 py-3 rounded-xl bg-black text-white hover:bg-gray-800">Đăng lên TikTok</button>
+  <button id="btnFacebook" class="px-5 py-3 rounded-xl bg-blue-700 text-white hover:bg-blue-800">Đăng lên Facebook</button>
+  <button id="btnYouTube" class="px-5 py-3 rounded-xl bg-red-600 text-white hover:bg-red-700">Đăng lên YouTube</button>
+  <button id="btnX" class="px-5 py-3 rounded-xl bg-gray-900 text-white hover:bg-black">Đăng lên X</button>
+</div>
+<div id="status" class="mt-4 text-sm text-gray-700"></div>
     </section>
 
     <aside class="bg-white rounded-2xl p-6 shadow">
@@ -87,6 +89,9 @@
 </footer>
 <script>
 let chosenBook = null;
+let selectedTitle = "";
+
+
 async function loadBooks(){
   const res = await fetch('./products.json');
   const items = await res.json();
@@ -96,25 +101,62 @@ async function loadBooks(){
   function render(q=''){
     const ql = q.toLowerCase();
     const filtered = items.filter(i => !q || i.title.toLowerCase().includes(ql)).slice(0,50);
-    list.innerHTML = filtered.map(i => (
-      `<button class='w-full text-left px-3 py-2 hover:bg-gray-100 rounded-lg'
-         onclick='chooseBook("${esc(i.title)}","${esc(i.author)}")'>
-         <span class='font-medium'>${esc(i.title)}</span><span class='text-gray-500'> — ${esc(i.author)}</span>
-       </button>`
-    )).join('');
+    list.innerHTML = filtered.map(i => {
+      const active = (i.title===selectedTitle);
+      return `<button class="w-full text-left px-3 py-2 rounded-lg flex items-center justify-between ${active?'bg-blue-50 ring-1 ring-blue-200':'hover:bg-gray-100'}"
+                onclick='chooseBook("${esc(i.title)}","${esc(i.author)}")'>
+                <span><span class="font-medium">${esc(i.title)}</span><span class="text-gray-500"> — ${esc(i.author)}</span></span>
+                ${active?'<span aria-hidden="true">✅</span>':''}
+              </button>`;
+    }).join('');
   }
   input.addEventListener('input', e=>render(e.target.value));
   render('');
+
+  // Wire action buttons
+  document.getElementById('btnTiktok').addEventListener('click', ()=>postToPlatform('tiktok'));
+  document.getElementById('btnFacebook').addEventListener('click', ()=>postToPlatform('facebook'));
+  document.getElementById('btnYouTube').addEventListener('click', ()=>postToPlatform('youtube'));
+  document.getElementById('btnX').addEventListener('click', ()=>postToPlatform('x'));
+}
+function toHashtag(title){
+  // Remove Vietnamese diacritics & spaces -> single hashtag
+  const s = title.normalize('NFD').replace(/\p{Diacritic}+/gu,'').replace(/[^0-9a-zA-Z]+/g,'').trim();
+  return s?('#'+s):'';
+}
+function ensureCaptionHasTag(title){
+  const el = document.getElementById('caption');
+  const tag = toHashtag(title);
+  let val = el.value||'';
+  if(tag && !new RegExp('(^|\\s)'+tag+'(\\s|$)').test(val)){
+    val = (val+' '+tag).trim();
+    el.value = val;
+  }
 }
 function chooseBook(title, author){
+  selectedTitle = title;
   chosenBook = {title, author};
   document.getElementById('status').innerHTML = `Đã chọn: <b>${title}</b> — ${author}`;
+  ensureCaptionHasTag(title);
+  // re-render to highlight
+  const evt = new Event('input');
+  document.getElementById('bookSearch').dispatchEvent(evt);
 }
-function loginTikTok(){
-  document.getElementById('status').innerText = "Chuyển hướng đến TikTok OAuth...";
-  setTimeout(()=>{ window.location.href = "./oauth/callback.html?code=demo123&state=review"; }, 1200);
+function isAuthed(platform){
+  // For demo: TikTok auth flag stored in localStorage
+  const key = platform+'_authed';
+  return localStorage.getItem(key)==='1';
 }
-function postToTikTok(){
+function requestAuth(platform){
+  document.getElementById('status').innerText = "Yêu cầu đăng nhập "+platform+"...";
+  // Simulate OAuth redirect
+  setTimeout(()=>{
+    localStorage.setItem(platform+'_authed','1');
+    document.getElementById('status').innerHTML = "✅ Đăng nhập "+platform+" thành công. Tiếp tục đăng...";
+    setTimeout(()=>postToPlatform(platform,true), 600);
+  }, 800);
+}
+function postToPlatform(platform, authed=false){
   const mode = document.querySelector('input[name="mode"]:checked').value;
   const file = document.getElementById('fileInput').files[0];
   const sample = document.getElementById('sampleSelect').value;
@@ -122,11 +164,16 @@ function postToTikTok(){
     document.getElementById('status').innerHTML = "<span class='text-red-600'>Vui lòng chọn file video hoặc video mẫu.</span>";
     return;
   }
+  if(!isAuthed(platform) && !authed){
+    requestAuth(platform);
+    return;
+  }
   const book = chosenBook ? ` [${chosenBook.title} — ${chosenBook.author}]` : "";
-  document.getElementById('status').innerText = "Gọi Content Posting API (init → upload → finalize)...";
+  const platformName = {tiktok:'TikTok', facebook:'Facebook', youtube:'YouTube', x:'X'}[platform]||platform;
+  document.getElementById('status').innerText = "Gọi API "+platformName+" (init → upload → finalize)...";
   setTimeout(()=>{
-    document.getElementById('status').innerHTML = `✅ Đã ${mode=='publish'?'đăng trực tiếp (Publish)':'lưu bản nháp (Draft)'} video${book} lên TikTok.`;
-  }, 1600);
+    document.getElementById('status').innerHTML = `✅ Đã ${mode=='publish'?'đăng trực tiếp (Publish)':'lưu bản nháp (Draft)'} video${book} lên ${platformName}.`;
+  }, 1000);
 }
 document.addEventListener('DOMContentLoaded', loadBooks);
 </script>
