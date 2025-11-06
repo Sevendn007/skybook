@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8">
-  <title>SkyBook – Review & Đăng TikTok (Sandbox)</title>
+  <title>SkyBook – Review & Đăng TikTok</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -21,91 +21,50 @@
       <a href="./review.html" class="text-blue-700 font-semibold">Review & Đăng TikTok</a>
       <a href="./checkout.html" class="hover:text-blue-600">Thanh toán</a>
     </nav>
-    <div class="ml-auto text-sm text-gray-500">Sandbox Integration</div>
   </div>
 </header>
 
 <main class="max-w-5xl mx-auto px-4 py-8 grid md:grid-cols-[2fr,1fr] gap-6">
   <section class="bg-white rounded-2xl shadow p-6">
     <h1 class="text-2xl font-bold mb-1">Đăng video review lên TikTok</h1>
-    <p class="text-gray-600 mb-6">
-      Chọn sách, upload video MP4 (6–20s), chọn chế độ <b>Draft</b> hoặc <b>Publish</b> rồi bấm <b>Đăng lên TikTok</b>.
-    </p>
+    <p class="text-gray-600 mb-6">Chọn sách, tải video MP4 (6–20s), nhập caption và bấm <b>Đăng lên TikTok</b>.</p>
 
-    <!-- Step 1: chọn sách -->
+    <!-- Chọn sách + file + caption -->
     <div class="grid md:grid-cols-2 gap-4">
       <div>
         <label class="block text-sm font-medium mb-1">Chọn sách</label>
-        <input id="bookSearch" type="text" placeholder="Nhập tên sách..."
-               class="w-full rounded-xl border px-3 py-2 mb-2">
+        <input id="bookSearch" type="text" placeholder="Nhập tên sách..." class="w-full rounded-xl border px-3 py-2 mb-2">
         <div id="bookList" class="h-64 overflow-auto border rounded-xl p-2 space-y-2"></div>
         <div class="text-sm text-gray-500 mt-2" id="selectedInfo">Chưa chọn</div>
       </div>
       <div>
         <label class="block text-sm font-medium mb-1">Chọn video review (MP4)</label>
-        <input id="fileInput" type="file" accept="video/mp4,video/*"
-               class="w-full rounded-xl border px-3 py-2">
-        <p class="text-xs text-gray-500 mt-2">Khuyên dùng 9:16, 6–15s. Dung lượng < 20MB.</p>
+        <input id="fileInput" type="file" accept="video/mp4,video/*" class="w-full rounded-xl border px-3 py-2">
+        <p class="text-xs text-gray-500 mt-2">Khuyên dùng 9:16, 6–15s, ≤ ~6MB.</p>
 
         <div class="mt-4">
-          <label class="block text-sm font-medium mb-1">Caption gợi ý</label>
+          <label class="block text-sm font-medium mb-1">Caption</label>
           <textarea id="caption" rows="3" class="w-full rounded-xl border px-3 py-2"
             placeholder="Cảm nhận nhanh về cuốn sách... #SkyBook #ReviewSach"></textarea>
         </div>
-
-        <div class="mt-4">
-          <label class="block text-sm font-medium mb-2">Chế độ đăng</label>
-          <div class="flex items-center gap-6">
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="mode" value="draft" checked>
-              <span>Draft (Upload vào Inbox) – Dễ pass review</span>
-            </label>
-          </div>
-          <div class="mt-2">
-            <label class="inline-flex items-center gap-2">
-              <input type="radio" name="mode" value="publish">
-              <span>Publish (Đăng thẳng – có thể bị hạn chế với app chưa audit)</span>
-            </label>
-          </div>
-        </div>
       </div>
     </div>
 
-    <!-- Actions -->
-    <div class="mt-6 flex flex-wrap gap-3">
-      <button id="btnTiktok"
-        class="px-5 py-3 rounded-xl bg-black text-white hover:bg-gray-800">
+    <!-- Action -->
+    <div class="mt-6">
+      <button id="btnTiktok" class="px-5 py-3 rounded-xl bg-black text-white hover:bg-gray-800">
         Đăng lên TikTok
       </button>
-    </div>
-
-    <!-- Status -->
-    <div id="status" class="mt-5 text-sm text-gray-700"></div>
-
-    <!-- Publish ID + Kiểm tra trạng thái -->
-    <div id="publishBox" class="hidden mt-4 border rounded-xl p-4 bg-gray-50">
-      <div class="mb-2">
-        <b>Publish ID:</b> <code id="publishId" class="text-xs"></code>
-      </div>
-      <button id="checkBtn" class="px-3 py-2 rounded bg-black text-white">Kiểm tra trạng thái</button>
-      <pre id="statusJson" class="text-xs bg-white p-3 rounded mt-3 overflow-auto max-h-64"></pre>
-      <p class="mt-2 text-xs text-gray-600">
-        Với <b>Draft</b>: Mở TikTok (tài khoản sandbox) → tab <b>Inbox</b> → bấm thông báo “From Apps / Uploaded content”
-        để vào trình chỉnh sửa (từ đó lưu Draft hoặc đăng).<br>
-        Với <b>Publish</b> (Direct Post): App chưa audit có thể bị chặn. Nếu gặp lỗi
-        <code>unaudited_client_can_only_post_to_private_accounts</code>, hãy chuyển tài khoản TikTok test sang <b>Private account</b>
-        hoặc dùng <b>Draft</b>.
-      </p>
+      <span id="status" class="ml-3 text-sm align-middle"></span>
     </div>
   </section>
 
   <aside class="bg-white rounded-2xl shadow p-6">
     <h3 class="text-lg font-semibold mb-3">Gợi ý</h3>
     <ul class="list-disc pl-5 text-sm text-gray-600 space-y-2">
-      <li>Chỉ tài khoản trong <b>Sandbox Target Users</b> mới authorize được.</li>
-      <li>Draft (Inbox) là flow đề xuất cho video demo review.</li>
-      <li>Direct Post có thể yêu cầu tài khoản TikTok là <b>Private</b> đối với app chưa audit.</li>
-      <li>Caption: thêm hashtag theo tên sách, #SkyBook, #ReviewSach.</li>
+      <li>Chỉ tài khoản trong <b>Sandbox Target Users</b> mới authorize.</li>
+      <li>Video dọc 9:16, tối thiểu 720×1280 (khuyên 1080×1920), H.264 + AAC.</li>
+      <li>Tối ưu dung lượng ≤ ~6MB để tải nhanh và ổn định.</li>
     </ul>
   </aside>
 </main>
@@ -117,6 +76,7 @@
 <script>
 const API_BASE = "https://skybook-api.vercel.app";
 
+// ====== Sách mẫu & hashtag ======
 let chosenBook = null;
 let allBooks = [
   {id:1,title:"Đắc Nhân Tâm",author:"Dale Carnegie"},
@@ -128,9 +88,7 @@ let allBooks = [
 ];
 
 function toHash(title){
-  return '#'+title.normalize('NFD')
-    .replace(/\p{Diacritic}+/gu,'')
-    .replace(/[^0-9a-zA-Z]+/g,'');
+  return '#'+title.normalize('NFD').replace(/\p{Diacritic}+/gu,'').replace(/[^0-9a-zA-Z]+/g,'');
 }
 
 function renderBooks(q=''){
@@ -151,7 +109,7 @@ function renderBooks(q=''){
       chosenBook = {title: btn.dataset.title, author: btn.dataset.author};
       document.getElementById('selectedInfo').innerHTML =
         `Đã chọn: <b>${chosenBook.title}</b> — ${chosenBook.author}`;
-      // auto hashtag
+      // auto hashtag theo tên sách
       const cap = document.getElementById('caption');
       const tag = toHash(chosenBook.title);
       if(!new RegExp('(^|\\s)'+tag+'(\\s|$)').test(cap.value||'')){
@@ -160,26 +118,10 @@ function renderBooks(q=''){
     };
   });
 }
-
 document.getElementById('bookSearch').addEventListener('input', e=>renderBooks(e.target.value));
 document.addEventListener('DOMContentLoaded', ()=>renderBooks(''));
 
-function startAutoPoll(publishId){
-  const box = document.getElementById('statusJson');
-  const timer = setInterval(async () => {
-    const token = await ensureTikTokAuth();
-    const r = await fetch(API_BASE + '/api/status', {
-      method:'POST',
-      headers:{ 'Authorization':'Bearer '+token, 'Content-Type':'application/json' },
-      body: JSON.stringify({ publish_id: publishId })
-    });
-    const j = await r.json();
-    box.textContent = JSON.stringify(j, null, 2);
-    const st = j?.data?.status;
-    if (st === 'PUBLISH_COMPLETE' || st === 'FAILED') clearInterval(timer);
-  }, 10000);
-}
-
+// ====== TikTok Auth ======
 async function ensureTikTokAuth(){
   let token = localStorage.getItem('tiktok_access_token');
   if(token) return token;
@@ -190,28 +132,29 @@ async function ensureTikTokAuth(){
   return null;
 }
 
-async function checkStatus(publishId){
-  const token = await ensureTikTokAuth(); if(!token) return;
-  const r = await fetch(API_BASE + '/api/status', {
-    method:'POST',
-    headers:{ 'Authorization':'Bearer '+token, 'Content-Type':'application/json' },
-    body: JSON.stringify({ publish_id: publishId })
-  });
-  const j = await r.json();
-  document.getElementById('statusJson').textContent = JSON.stringify(j, null, 2);
-}
-
-async function realPublish(){
+// ====== Upload & Publish (chỉ Publish) ======
+document.getElementById('btnTiktok').addEventListener('click', async ()=>{
+  const statusEl = document.getElementById('status');
   try{
     const token = await ensureTikTokAuth(); if(!token) return;
-
-    const mode = document.querySelector('input[name="mode"]:checked').value; // draft | publish
-    const caption = document.getElementById('caption').value || '';
     const file = document.getElementById('fileInput').files[0];
-    const statusEl = document.getElementById('status');
+    const caption = document.getElementById('caption').value || '';
+    if(!file){
+      statusEl.innerText = 'Vui lòng chọn file video.';
+      statusEl.className = 'ml-3 text-sm text-red-600';
+      return;
+    }
 
-    if (!file) {
-      statusEl.innerHTML = '<span class="text-red-600">Vui lòng chọn file video (MP4) để upload.</span>';
+    // Kiểm tra nhanh tỷ lệ dọc (không bắt buộc, chỉ để tránh fail)
+    const url = URL.createObjectURL(file);
+    const v = document.createElement('video');
+    v.preload = 'metadata';
+    const ready = new Promise(resolve => v.onloadedmetadata = resolve);
+    v.src = url; await ready; URL.revokeObjectURL(url);
+    const w = v.videoWidth, h = v.videoHeight, ratio = w/h;
+    if (h < 1280 || ratio > 0.62) {
+      statusEl.innerText = 'Video nên là dọc 9:16 (≥ 720×1280).';
+      statusEl.className = 'ml-3 text-sm text-red-600';
       return;
     }
 
@@ -219,56 +162,31 @@ async function realPublish(){
     fd.append('video', file);
     fd.append('caption', caption);
 
-    statusEl.innerText = `⏳ Đang upload video (${mode === 'draft' ? 'Draft' : 'Publish'})...`;
+    statusEl.innerText = 'Đang đăng lên TikTok...';
+    statusEl.className = 'ml-3 text-sm text-gray-700';
 
     const ac = new AbortController();
     const t = setTimeout(()=>ac.abort(), 300000); // 300s
-    const resp = await fetch(`${API_BASE}/api/publish-file?mode=${encodeURIComponent(mode)}`, {
+    const resp = await fetch(`${API_BASE}/api/publish-file?mode=publish`, {
       method: 'POST',
       headers: { 'Authorization': 'Bearer ' + token },
       body: fd,
       signal: ac.signal
     }).finally(()=>clearTimeout(t));
 
-    let data = null;
-    try { data = await resp.json(); } catch { data = { raw: await resp.text() }; }
-
+    // Không hiển thị log; chỉ hiện thành công/thất bại
     if (resp.ok) {
-      statusEl.innerHTML = "✅ Thành công.<pre class='text-xs bg-gray-50 p-3 rounded mt-2'>" +
-        JSON.stringify(data, null, 2) + "</pre>";
-
-      const pid = data?.init?.data?.publish_id;
-      if (pid) {
-        document.getElementById('publishId').innerText = pid;
-        document.getElementById('publishBox').classList.remove('hidden');
-        document.getElementById('checkBtn').onclick = () => checkStatus(pid);
-      }
+      statusEl.innerText = 'Đăng thành công.';
+      statusEl.className = 'ml-3 text-sm text-green-700';
     } else {
-      // hiển thị lỗi rõ + gợi ý xử lý với lỗi phổ biến
-      const code = data?.response?.error?.code || data?.error?.code || '';
-      let tip = '';
-      if (code === 'unaudited_client_can_only_post_to_private_accounts') {
-        tip = `
-          <div class="mt-2 text-xs text-amber-700">
-            Gợi ý: App chưa audit có thể bị chặn Direct Post. Hãy:
-            <ul class="list-disc pl-5">
-              <li>Dùng chế độ <b>Draft</b> để demo (khuyên dùng cho review), hoặc</li>
-              <li>Đặt tài khoản TikTok test sang <b>Private account</b>, rồi thử Publish lại.</li>
-            </ul>
-          </div>`;
-      }
-      statusEl.innerHTML =
-        "<span class='text-red-600'>❌ Lỗi</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
-        + JSON.stringify(data, null, 2) + "</pre>" + tip;
+      statusEl.innerText = 'Đăng thất bại.';
+      statusEl.className = 'ml-3 text-sm text-red-600';
     }
-  }catch(err){
-    document.getElementById('status').innerHTML =
-      "<span class='text-red-600'>❌ Request lỗi / timeout</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
-      + String(err) + "</pre>";
+  }catch(e){
+    statusEl.innerText = 'Đăng thất bại.';
+    statusEl.className = 'ml-3 text-sm text-red-600';
   }
-}
-
-document.getElementById('btnTiktok').addEventListener('click', realPublish);
+});
 </script>
 </body>
 </html>
