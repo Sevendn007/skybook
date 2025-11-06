@@ -164,6 +164,22 @@ function renderBooks(q=''){
 document.getElementById('bookSearch').addEventListener('input', e=>renderBooks(e.target.value));
 document.addEventListener('DOMContentLoaded', ()=>renderBooks(''));
 
+function startAutoPoll(publishId){
+  const box = document.getElementById('statusJson');
+  const timer = setInterval(async () => {
+    const token = await ensureTikTokAuth();
+    const r = await fetch(API_BASE + '/api/status', {
+      method:'POST',
+      headers:{ 'Authorization':'Bearer '+token, 'Content-Type':'application/json' },
+      body: JSON.stringify({ publish_id: publishId })
+    });
+    const j = await r.json();
+    box.textContent = JSON.stringify(j, null, 2);
+    const st = j?.data?.status;
+    if (st === 'PUBLISH_COMPLETE' || st === 'FAILED') clearInterval(timer);
+  }, 10000);
+}
+
 async function ensureTikTokAuth(){
   let token = localStorage.getItem('tiktok_access_token');
   if(token) return token;
