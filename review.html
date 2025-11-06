@@ -172,90 +172,53 @@ async function ensureTikTokAuth(){
   return null;
 }
 
-// async function realPublish(){
-//   const token = await ensureTikTokAuth();
-//   if(!token) return;
-
-//   const mode = document.querySelector('input[name="mode"]:checked').value;
-//   const caption = document.getElementById('caption').value || '';
-//   const file = document.getElementById('fileInput').files[0];
-//   const sample = document.getElementById('sampleSelect').value;
-
-//   // Demo Sandbox thuận tiện: dùng Pull-from-URL (không upload binary từ trình duyệt)
-//   let sourceUrl = '';
-//   if(!file){
-//     if(sample==='sample_a') sourceUrl = location.origin + '/skybook/media/sample_a.mp4';
-//     if(sample==='sample_b') sourceUrl = location.origin + '/skybook/media/sample_b.mp4';
-//   }
-
-//   document.getElementById('status').innerText = 'Đang gọi TikTok Sandbox (init → publish)...';
-
-//   const resp = await fetch(API_BASE + '/api/publish', {
-//     method:'POST',
-//     headers:{
-//       'Authorization':'Bearer '+localStorage.getItem('tiktok_access_token'),
-//       'X-Caption': caption,
-//       'X-Mode': mode,
-//       'X-Source-Url': sourceUrl
-//     }
-//   });
-//   const data = await resp.json();
-//   if(resp.ok){
-//     document.getElementById('status').innerHTML = "✅ Hoàn tất.\n<pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"+JSON.stringify(data,null,2)+"</pre>";
-//   }else{
-//     document.getElementById('status').innerHTML = "<span class='text-red-600'>❌ Lỗi</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"+JSON.stringify(data,null,2)+"</pre>";
-//   }
-// }
-
 async function realPublish(){
   try{
     const token = await ensureTikTokAuth();
     if(!token) return;
 
-    const mode = document.querySelector('input[name="mode"]:checked').value;
+    const mode = document.querySelector('input[name="mode"]:checked').value; // 'publish' | 'draft'
     const caption = document.getElementById('caption').value || '';
-    const sample = document.getElementById('sampleSelect').value;
+    const file = document.getElementById('fileInput').files[0];
 
-    // đảm bảo URL video hợp lệ
-    let sourceUrl = '';
-    if(sample==='sample_a') sourceUrl = location.origin + '/skybook/media/sample_a.mp4';
-    else if(sample==='sample_b') sourceUrl = location.origin + '/skybook/media/sample_b.mp4';
-    else {
-      document.getElementById('status').innerText = 'Vui lòng chọn video mẫu hoặc upload file.';
+    const statusEl = document.getElementById('status');
+
+    if (!file) {
+      statusEl.innerHTML = '<span class="text-red-600">Vui lòng chọn file video để upload.</span>';
       return;
     }
 
-    document.getElementById('status').innerText = 'Đang gọi TikTok Sandbox (init → publish)...';
+    const fd = new FormData();
+    fd.append('video', file);
+
+    statusEl.innerText = `Đang upload ${mode === 'draft' ? 'DRAFT' : 'PUBLISH'} lên TikTok (Sandbox)...`;
 
     const ac = new AbortController();
-    const t = setTimeout(()=>ac.abort(), 25000); // timeout 25s
+    const t = setTimeout(()=>ac.abort(), 120000); // 120s timeout client
 
-    const resp = await fetch(API_BASE + '/api/publish', {
-      method:'POST',
-      headers:{
-        'Authorization':'Bearer '+localStorage.getItem('tiktok_access_token'),
-        'X-Caption': caption,
-        'X-Mode': mode,
-        'X-Source-Url': sourceUrl
+    const resp = await fetch(`https://skybook-api.vercel.app/api/publish-file?mode=${encodeURIComponent(mode)}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'X-Caption': caption
       },
+      body: fd,
       signal: ac.signal
     }).finally(()=>clearTimeout(t));
 
     let data = null;
     try { data = await resp.json(); } catch { data = { raw: await resp.text() }; }
 
-    if(resp.ok){
-      document.getElementById('status').innerHTML =
-        "✅ Phản hồi từ API.<pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
-        + JSON.stringify(data,null,2) + "</pre>";
+    if (resp.ok) {
+      statusEl.innerHTML = "✅ Thành công.<pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
+        + JSON.stringify(data, null, 2) + "</pre>";
     } else {
-      document.getElementById('status').innerHTML =
-        "<span class='text-red-600'>❌ Lỗi từ API</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
-        + JSON.stringify(data,null,2) + "</pre>";
+      statusEl.innerHTML = "<span class='text-red-600'>❌ Lỗi</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
+        + JSON.stringify(data, null, 2) + "</pre>";
     }
   }catch(err){
     document.getElementById('status').innerHTML =
-      "<span class='text-red-600'>❌ Request bị hủy / timeout / mạng.</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
+      "<span class='text-red-600'>❌ Request lỗi/timeout</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
       + String(err) + "</pre>";
   }
 }
