@@ -180,7 +180,6 @@ async function realPublish(){
     const mode = document.querySelector('input[name="mode"]:checked').value; // 'publish' | 'draft'
     const caption = document.getElementById('caption').value || '';
     const file = document.getElementById('fileInput').files[0];
-
     const statusEl = document.getElementById('status');
 
     if (!file) {
@@ -188,10 +187,12 @@ async function realPublish(){
       return;
     }
 
+    // ✅ Không dùng X-Caption nữa — chuyển caption vào FormData
     const fd = new FormData();
     fd.append('video', file);
+    fd.append('caption', caption);  // <— giúp server lấy subtitle/title
 
-    statusEl.innerText = `Đang upload ${mode === 'draft' ? 'DRAFT' : 'PUBLISH'} lên TikTok (Sandbox)...`;
+    statusEl.innerText = `⏳ Đang upload video (${mode === 'draft' ? 'Bản nháp' : 'Đăng công khai'})...`;
 
     const ac = new AbortController();
     const t = setTimeout(()=>ac.abort(), 120000); // 120s timeout client
@@ -199,8 +200,7 @@ async function realPublish(){
     const resp = await fetch(`https://skybook-api.vercel.app/api/publish-file?mode=${encodeURIComponent(mode)}`, {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer ' + token,
-        'X-Caption': caption
+        'Authorization': 'Bearer ' + token  // ✅ header này vẫn được
       },
       body: fd,
       signal: ac.signal
@@ -218,7 +218,7 @@ async function realPublish(){
     }
   }catch(err){
     document.getElementById('status').innerHTML =
-      "<span class='text-red-600'>❌ Request lỗi/timeout</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
+      "<span class='text-red-600'>❌ Request lỗi / timeout</span><pre class='text-xs bg-gray-50 p-3 rounded mt-2'>"
       + String(err) + "</pre>";
   }
 }
