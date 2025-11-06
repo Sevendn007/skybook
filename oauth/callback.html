@@ -1,1 +1,51 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>OAuth Callback — SkyBook</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-gray-50 text-gray-800"><main class="container mx-auto px-4 py-14"><h1 class="text-3xl font-bold mb-6">TikTok OAuth Callback</h1><div id="box" class="bg-white rounded-2xl p-6 shadow"></div><div class="mt-6"><a href="../review.html" class="px-5 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-700">Quay lại Review &amp; Đăng TikTok</a></div></main><script>const p=new URLSearchParams(location.search);const code=p.get('code');const state=p.get('state');document.getElementById('box').innerHTML=`<p>Code: <b>${code||'(không có)'}</b></p><p>State: <b>${state||'(không có)'}</b></p><p class='text-sm text-gray-500 mt-3'>Trang này dùng để hiển thị tham số redirect từ TikTok (OAuth2).</p>`;</script></body></html>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>SkyBook - TikTok OAuth Callback</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+
+<div class="bg-white p-6 rounded-xl shadow-md w-full max-w-lg">
+  <h1 class="text-2xl font-bold mb-4">Đang xử lý đăng nhập TikTok...</h1>
+  <div id="box" class="text-gray-700 text-sm"></div>
+</div>
+
+<script>
+const API_BASE = "https://skybook-api.vercel.app";
+
+const url = new URL(location.href);
+const code = url.searchParams.get("code");
+const state = url.searchParams.get("state");
+
+document.getElementById('box').innerHTML =
+  `<p>Code: <b>${code || "Không có"}</b></p><p>State: <b>${state || "Không có"}</b></p>`;
+
+if (code) {
+  fetch(API_BASE + "/api/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      code,
+      redirect_uri: "https://sevendn007.github.io/skybook/oauth/callback.html"
+    })
+  })
+  .then(r => r.json())
+  .then(d => {
+    if (d.access_token) {
+      localStorage.setItem("tiktok_access_token", d.access_token);
+      document.getElementById('box').innerHTML += `<p class="text-green-600 mt-3">✅ Nhận access_token thành công.</p>`;
+      setTimeout(() => location.href = "../review.html", 800);
+    } else {
+      document.getElementById('box').innerHTML += `<pre class="text-xs bg-gray-100 p-3 rounded mt-3">${JSON.stringify(d,null,2)}</pre>`;
+    }
+  })
+  .catch(() => {
+    document.getElementById('box').innerHTML += `<p class="text-red-600 mt-3">❌ Lỗi kết nối API /api/token</p>`;
+  });
+}
+</script>
+
+</body>
+</html>
