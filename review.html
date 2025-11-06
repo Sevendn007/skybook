@@ -195,7 +195,7 @@ async function realPublish(){
     statusEl.innerText = `⏳ Đang upload video (${mode === 'draft' ? 'Bản nháp' : 'Đăng công khai'})...`;
 
     const ac = new AbortController();
-    const t = setTimeout(()=>ac.abort(), 120000); // 120s timeout client
+    const t = setTimeout(()=>ac.abort(), 300000); // 300s timeout client
 
     const resp = await fetch(`https://skybook-api.vercel.app/api/publish-file?mode=${encodeURIComponent(mode)}`, {
       method: 'POST',
